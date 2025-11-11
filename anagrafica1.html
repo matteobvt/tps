@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Dati personali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+        }
+        th {
+            background-color: #eee;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Inserisci i tuoi dati</h2>
+
+    <label>Nome: <input type="text" id="nome" value="Matteo"></label><br>
+    <label>Cognome: <input type="text" id="cognome" value="Bovetti"></label><br>
+    <label>Indirizzo: <input type="text" id="indirizzo" value="Via cesare battisti 21"></label><br>
+    <label>Città: <input type="text" id="citta" value="Pero"></label><br>
+
+    <button onclick="stampaDati()">Mostra tabella</button>
+
+    <div id="risultato"></div>
+
+    <script>
+        function stampaDati() {
+            var nome = document.getElementById("nome").value;
+            var cognome = document.getElementById("cognome").value;
+            var indirizzo = document.getElementById("indirizzo").value;
+            var citta = document.getElementById("citta").value;
+
+            var tabella = "<table>";
+            tabella += "<tr><th>Nome</th><th>Cognome</th><th>Indirizzo</th><th>Città</th></tr>";
+            tabella += "<tr>";
+            tabella += "<td>" + nome + "</td>";
+            tabella += "<td>" + cognome + "</td>";
+            tabella += "<td>" + indirizzo + "</td>";
+            tabella += "<td>" + citta + "</td>";
+            tabella += "</tr>";
+            tabella += "</table>";
+
+            document.getElementById("risultato").innerHTML = tabella;
+        }
+    </script>
+</body>
+</html>
