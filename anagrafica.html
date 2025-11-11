@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Dati personali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+        }
+        th {
+            background-color: #eee;
+        }
+        input, select {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Inserisci i tuoi dati</h2>
+
+    <label>Nome: <input type="text" id="nome" value="Matteo"></label><br>
+    <label>Cognome: <input type="text" id="cognome" value="Bovetti"></label><br>
+    <label>Indirizzo: <input type="text" id="indirizzo" value="Via Cesare Battisti 21"></label><br>
+    <label>Città: <input type="text" id="citta" value="Pero"></label><br>
+
+    <button onclick="stampaDati()">Mostra tabella</button>
+
+    <div id="risultato"></div>
+
+    <h3>Colori preferiti</h3>
+    <input type="radio" name="colori" value="rosso"> Rosso<br>
+    <input type="radio" name="colori" value="verde"> Verde<br>
+    <input type="radio" name="colori" value="bianco"> Bianco<br>
+
+    <input type="button" onclick="controlla();" value="Invia"><br><br>
+
+    <h3>Veicoli posseduti</h3>
+    <input type="checkbox" id="box1" name="bici" value="bici" onclick="onClickHandler(this.value);">
+    <label for="box1">Ho una bici</label><br>
+
+    <input type="checkbox" id="box2" name="auto" value="auto" onclick="onClickHandler(this.value);">
+    <label for="box2">Ho un'auto</label><br>
+
+    <input type="checkbox" id="box3" name="barca" value="barca" onclick="onClickHandler(this.value);">
+    <label for="box3">Ho una barca</label><br>
+
+    <p id="risp"></p>
+
+    <form name="MyForm">
+        <h3>Province</h3>
+        <select name="provincia" multiple style="height:100px">
+            <option value="RM">Roma</option>
+            <option value="NA">Napoli</option>
+            <option value="TO">Torino</option>
+            <option value="MI">Milano</option>
+            <option value="PV">Pavia</option>
+            <option value="VA">Varese</option>
+            <option value="CR">Cremona</option>
+            <option value="IS">Isernia</option>
+        </select><br>
+        <input type="button" onclick="seleziona()" value="Premi">
+    </form>
+
+    <div id="scelta"></div>
+
+    <script>
+        function onClickHandler(s) {
+            document.getElementById("risp").innerHTML += s + ", ";
+        }
+
+        function seleziona() {
+            var options = document.forms.MyForm.provincia.options;
+            var selectedOptions = [];
+
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].selected) {
+                    selectedOptions.push(options[i].value);
+                }
+            }
+
+            document.location.href = "ricezione.html?prov=" + selectedOptions;
+        }
+
+        function stampaDati() {
+            var nome = document.getElementById("nome").value;
+            var cognome = document.getElementById("cognome").value;
+            var indirizzo = document.getElementById("indirizzo").value;
+            var citta = document.getElementById("citta").value;
+
+            var tabella = "<table>";
+            tabella += "<tr><th>Nome</th><th>Cognome</th><th>Indirizzo</th><th>Città</th></tr>";
+            tabella += "<tr>";
+            tabella += "<td>" + nome + "</td>";
+            tabella += "<td>" + cognome + "</td>";
+            tabella += "<td>" + indirizzo + "</td>";
+            tabella += "<td>" + citta + "</td>";
+            tabella += "</tr>";
+            tabella += "</table>";
+
+            document.getElementById("risultato").innerHTML = tabella;
+        }
+    </script>
+</body>
+</html>
