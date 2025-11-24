@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anagrafica2.0</title>
+
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 8px;
+    }
+  </style>
+  <script>
+
+    const anagrafica ={
+      nome: "",
+      cognome: "",
+      indirizzo: "",
+      citta: "",
+      sesso: "",
+      diplomi: [],
+      provincia: "",
+      sport: []
+    }
+    function stampa() {
+      let nome = document.getElementById("nome").value;
+      let cognome = document.getElementById("cognome").value;
+      let indirizzo = document.getElementById("indirizzo").value;
+      let citta = document.getElementById("citta").value;
+
+      let sesso = " ";
+      if (document.getElementById("maschio").checked) {
+        sesso = "Maschio";
+      } else if (document.getElementById("femmina").checked) {
+        sesso = "Femmina";
+      } else {
+        sesso = "Non selezionato";
+      }
+
+      let checkboxes = document.getElementsByName("diploma");
+      let testo = "";
+
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          testo += checkboxes[i].value + " ,  ";
+        }
+      }
+
+      if (testo == "") {
+        testo = "Nessun Diploma selezionato";
+      }
+
+      let provincia = document.getElementById("provincia").value;
+      let sportOptions = document.getElementById("sport").options;
+      let sportSelezionati = "";
+      for (var i = 0; i < sportOptions.length; i++) {
+        if (sportOptions[i].selected) {
+          if (sportSelezionati !== "") { sportSelezionati += ", "; }
+          sportSelezionati += sportOptions[i].value;
+        }
+      }
+      if (sportSelezionati == "") { sportSelezionati = "Nessuno"; }
+      let risultato = "<p>" + nome + ",  " + cognome + ", " + indirizzo + ", " + citta + ", " + provincia + ", " + sportSelezionati + "</p>";
+      document.getElementById("1").innerHTML = risultato;
+      document.getElementById("2").innerHTML = "Hai selezionato: " + sesso;
+      document.getElementById("3").innerHTML = testo;
+    }
+  </script>
+</head>
+
+<body bgcolor="white">
+  <h2>Anagrafica 3.0 ==> <a href="https://sielpo08-glitch.github.io/Tps/">Go Back</a></h2>
+  <input type="text" id="nome" placeholder="Nome"><br>
+  <input type="text" id="cognome" placeholder="Cognome"><br>
+  <input type="text" id="indirizzo" placeholder="Indirizzo"><br>
+  <input type="text" id="citta" placeholder="Città"><br>
+
+  <input name="sesso" type="radio" id="maschio" placeholder="maschio">Maschio<br>
+  <input name="sesso" type="radio" id="femmina" placeholder="femmina">Femmina<br>
+
+  <label>Diplomi posseduti:</label><br>
+  <input type="checkbox" name="diploma" value="Licenza Media"> Licenza Media<br>
+  <input type="checkbox" name="diploma" value="Diploma Superiore"> Diploma Superiore<br>
+  <input type="checkbox" name="diploma" value="Laurea"> Laurea<br><br>
+
+  <label>Provincia:</label><br>
+  <select id="provincia">
+    <option value="MI">Milano (MI)</option>
+    <option value="TO">Torino (TO)</option>
+    <option value="RM">Roma (RM)</option>
+    <option value="NA">Napoli (NA)</option>
+  </select><br><br>
+
+  <label>Sport praticati:</label><br>
+  <select id="sport" multiple size="4">
+    <option value="Calcio">Calcio</option>
+    <option value="Basket">Basket</option>
+    <option value="Nuoto">Nuoto</option>
+    <option value="Tennis">Tennis</option>
+    <option value="Palestra">Palestra</option>
+    <option value="Golf">Golf</option>
+    <option value="Cricket">Cricket</option>
+    <option value="Pallanuoto">Pallanuoto</option>
+
+  </select><br><br>
+
+  <input type="button" value="Stampa" onclick="stampa()"><br><br>
+  <div id="1"></div>
+  <div id="2"></div>
+  <div id="3"></div>
+
+
+
+
+
+</body>
+
+
+</html>
