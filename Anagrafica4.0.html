@@ -117,4 +117,34 @@
       <th>Cognome</th>
       <th>Età</th>
       <th>Città</th>
-      <th>P
+      <th>Provincia</th>
+      <th>Nazione</th>
+      <th>Azioni</th>
+    </tr>
+    <tbody id="cont"></tbody>
+  </table>
+
+  <script>
+    let cont = document.getElementById("cont");
+    let s = JSON.parse(localStorage.getItem("elenco"));
+
+    if (s !== null) {
+      for (let i = 0; i < s.length; i++) {
+        let tr = document.createElement("tr");
+
+        tr.innerHTML =
+          "<td>" + s[i].nome + "</td>" +
+          "<td>" + s[i].cognome + "</td>" +
+          "<td>" + s[i].eta + "</td>" +
+          "<td>" + s[i].citta + "</td>" +
+          "<td>" + s[i].provincia + "</td>" +
+          "<td>" + s[i].nazione + "</td>" +
+          "<td><button onclick='rimuovi(" + i + ")'>Rimuovi</button></td>";
+
+        cont.appendChild(tr);
+      }
+    }
+  </script>
+
+</body>
+</html>
