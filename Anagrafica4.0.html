@@ -29,10 +29,6 @@
       margin-top: 10px;
     }
 
-    input[type="button"]:hover {
-      background-color: #483d8b;
-    }
-
     table {
       background: white;
       border-radius: 8px;
@@ -51,31 +47,16 @@
       padding: 8px;
       text-align: center;
     }
-
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
   </style>
 </head>
 <body>
 
-  <input type="text" id="nome">
-  Nome<br>
-
-  <input type="text" id="cognome">
-  cognome<br>
-
-  <input type="number" id="eta">
-  eta<br>
-
-  <input type="text" id="citta">
-  citta<br>
-
-  <input type="text" id="provincia">
-  provincia<br>
-
-  <input type="text" id="nazione">
-  nazione<br>
+  <input type="text" id="nome"> Nome<br>
+  <input type="text" id="cognome"> cognome<br>
+  <input type="number" id="eta"> eta<br>
+  <input type="text" id="citta"> citta<br>
+  <input type="text" id="provincia"> provincia<br>
+  <input type="text" id="nazione"> nazione<br>
 
   <input type="button" value="inserisci" onclick="ana()">
 
@@ -103,6 +84,20 @@
 
       elementi.push(persone);
       localStorage.setItem("elenco", JSON.stringify(elementi));
+
+      // ======= INIZIO PARTE AGGIUNTA =======
+      let tr = document.createElement("tr");
+
+      tr.innerHTML =
+        "<td>" + nome + "</td>" +
+        "<td>" + cognome + "</td>" +
+        "<td>" + eta + "</td>" +
+        "<td>" + citta + "</td>" +
+        "<td>" + provincia + "</td>" +
+        "<td>" + nazione + "</td>";
+
+      document.getElementById("cont").appendChild(tr);
+      // ======= FINE PARTE AGGIUNTA =======
     }
   </script>
 
