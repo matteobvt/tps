@@ -26,28 +26,35 @@
             color: white;
         }
     </style>
-        
-    
 </head>
 <body>
 
-   <input type="text" id="nome" >
-  Nome  <br>
-  <input type="text" id="cognome" >
-  cognome  <br>
-  <input type="number" id="eta" >
-  eta  <br>
-   <input type="text" id="citta" >
-  citta  <br>
-<input type="text" id="provincia">
-  provincia  <br>
-   <input type="text" id="nazione">
-  nazione  <br>
- 
+  <input type="text" id="nome">
+  Nome<br>
+
+  <input type="text" id="cognome">
+  cognome<br>
+
+  <input type="number" id="eta">
+  eta<br>
+
+  <input type="text" id="citta">
+  citta<br>
+
+  <input type="text" id="provincia">
+  provincia<br>
+
+  <input type="text" id="nazione">
+  nazione<br>
+
   <input type="button" value="inserisci" onclick="ana()">
 
   <script>
-    let elementi = [];
+    let elementi = JSON.parse(localStorage.getItem("elenco"));
+    if (elementi === null) {
+      elementi = [];
+    }
+
     function ana() {
       let nome = document.getElementById("nome").value;
       let cognome = document.getElementById("cognome").value;
@@ -55,7 +62,7 @@
       let citta = document.getElementById("citta").value;
       let provincia = document.getElementById("provincia").value;
       let nazione = document.getElementById("nazione").value;
- 
+
       const persone = {};
       persone.nome = nome;
       persone.cognome = cognome;
@@ -63,13 +70,13 @@
       persone.citta = citta;
       persone.provincia = provincia;
       persone.nazione = nazione;
-     
+
       elementi.push(persone);
       localStorage.setItem("elenco", JSON.stringify(elementi));
     }
   </script>
 
-   <table border="1">
+  <table border="1">
     <tr>
       <th>Nome</th>
       <th>Cognome</th>
@@ -80,24 +87,27 @@
     </tr>
     <tbody id="cont"></tbody>
   </table>
-     <script>
-         let cont = document.getElementById("cont");
+
+  <script>
+    let cont = document.getElementById("cont");
     let s = JSON.parse(localStorage.getItem("elenco"));
 
-    for (let i = 0; i < s.length; i++) {
-      let tr = document.createElement("tr");
+    if (s !== null) {
+      for (let i = 0; i < s.length; i++) {
+        let tr = document.createElement("tr");
 
-      tr.innerHTML =
-        "<td>" + s[i].nome + "</td>" +
-        "<td>" + s[i].cognome + "</td>" +
-        "<td>" + s[i].eta + "</td>" +
-        "<td>" + s[i].citta + "</td>" +
-        "<td>" + s[i].provincia + "</td>" +
-        "<td>" + s[i].nazione + "</td>";
-  cont.appendChild(tr); 
+        tr.innerHTML =
+          "<td>" + s[i].nome + "</td>" +
+          "<td>" + s[i].cognome + "</td>" +
+          "<td>" + s[i].eta + "</td>" +
+          "<td>" + s[i].citta + "</td>" +
+          "<td>" + s[i].provincia + "</td>" +
+          "<td>" + s[i].nazione + "</td>";
+
+        cont.appendChild(tr);
+      }
     }
-  
-    </script>
+  </script>
 
 </body>
 </html>
