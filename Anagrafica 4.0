@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anagrafica 4.0</title>
+  <style>
+        body {
+            background: linear-gradient(135deg, #89CFF0, #9370DB);
+            font-family: Arial, sans-serif;
+            color: #222;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        table {
+            background: white;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        th {
+            background-color: #b19cd9;
+            color: white;
+        }
+    </style>
+        
+    
+</head>
+<body>
+
+   <input type="text" id="nome" >
+  Nome  <br>
+  <input type="text" id="cognome" >
+  cognome  <br>
+  <input type="number" id="eta" >
+  eta  <br>
+   <input type="text" id="citta" >
+  citta  <br>
+<input type="text" id="provincia">
+  provincia  <br>
+   <input type="text" id="nazione">
+  nazione  <br>
+ 
+  <input type="button" value="inserisci" onclick="ana()">
+
+  <script>
+    let elementi = [];
+    function ana() {
+      let nome = document.getElementById("nome").value;
+      let cognome = document.getElementById("cognome").value;
+      let eta = document.getElementById("eta").value;
+      let citta = document.getElementById("citta").value;
+      let provincia = document.getElementById("provincia").value;
+      let nazione = document.getElementById("nazione").value;
+ 
+      const persone = {};
+      persone.nome = nome;
+      persone.cognome = cognome;
+      persone.eta = eta;
+      persone.citta = citta;
+      persone.provincia = provincia;
+      persone.nazione = nazione;
+     
+      elementi.push(persone);
+      localStorage.setItem("elenco", JSON.stringify(elementi));
+    }
+  </script>
+
+   <table border="1">
+    <tr>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Età</th>
+      <th>Città</th>
+      <th>Provincia</th>
+      <th>Nazione</th>
+    </tr>
+    <tbody id="cont"></tbody>
+  </table>
+     <script>
+         let cont = document.getElementById("cont");
+    let s = JSON.parse(localStorage.getItem("elenco"));
+
+    for (let i = 0; i < s.length; i++) {
+      let tr = document.createElement("tr");
+
+      tr.innerHTML =
+        "<td>" + s[i].nome + "</td>" +
+        "<td>" + s[i].cognome + "</td>" +
+        "<td>" + s[i].eta + "</td>" +
+        "<td>" + s[i].citta + "</td>" +
+        "<td>" + s[i].provincia + "</td>" +
+        "<td>" + s[i].nazione + "</td>";
+  cont.appendChild(tr); 
+    }
+  
+    </script>
+
+</body>
+</html>
