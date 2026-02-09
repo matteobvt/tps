@@ -85,8 +85,6 @@
       elementi.push(persone);
       localStorage.setItem("elenco", JSON.stringify(elementi));
 
-      // ======= INIZIO PARTE AGGIUNTA (RIGA + BOTTONE) =======
-      let index = elementi.length - 1;
       let tr = document.createElement("tr");
 
       tr.innerHTML =
@@ -95,20 +93,10 @@
         "<td>" + eta + "</td>" +
         "<td>" + citta + "</td>" +
         "<td>" + provincia + "</td>" +
-        "<td>" + nazione + "</td>" +
-        "<td><button onclick='rimuovi(" + index + ")'>Rimuovi</button></td>";
+        "<td>" + nazione + "</td>";
 
       document.getElementById("cont").appendChild(tr);
-      // ======= FINE PARTE AGGIUNTA =======
     }
-
-    // ======= INIZIO PARTE AGGIUNTA (FUNZIONE RIMUOVI) =======
-    function rimuovi(index) {
-      elementi.splice(index, 1);
-      localStorage.setItem("elenco", JSON.stringify(elementi));
-      location.reload();
-    }
-    // ======= FINE PARTE AGGIUNTA =======
   </script>
 
   <table border="1">
@@ -119,7 +107,6 @@
       <th>Città</th>
       <th>Provincia</th>
       <th>Nazione</th>
-      <th>Azioni</th>
     </tr>
     <tbody id="cont"></tbody>
   </table>
@@ -138,8 +125,7 @@
           "<td>" + s[i].eta + "</td>" +
           "<td>" + s[i].citta + "</td>" +
           "<td>" + s[i].provincia + "</td>" +
-          "<td>" + s[i].nazione + "</td>" +
-          "<td><button onclick='rimuovi(" + i + ")'>Rimuovi</button></td>";
+          "<td>" + s[i].nazione + "</td>";
 
         cont.appendChild(tr);
       }
