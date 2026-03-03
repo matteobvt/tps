@@ -66,6 +66,7 @@
       elementi = [];
     }
 
+    
     const regexNome = /^[a-zA-Z]+$/;
     const regexCognome = /^[a-zA-Z]+$/;
     const regexEta = /^(?:1[01][0-9]|120|[0-9]{1,2})$/;
@@ -124,6 +125,7 @@
       aggiungiRiga(persone);
     }
 
+    
   </script>
 
   <table border="1">
@@ -143,17 +145,14 @@
     let s = JSON.parse(localStorage.getItem("elenco"));
     if (s !== null) {
       for (let i = 0; i < s.length; i++) {
-        let tr = document.createElement("tr");
-        tr.innerHTML =
-          "<td>" + s[i].nome + "</td>" +
-          "<td>" + s[i].cognome + "</td>" +
-          "<td>" + s[i].eta + "</td>" +
-          "<td>" + s[i].citta + "</td>" +
-          "<td>" + s[i].provincia + "</td>" +
-          "<td>" + s[i].nazione + "</td>";
-        cont.appendChild(tr);
+        aggiungiRiga(s[i]);
       }
     }
+
+
+    window.addEventListener("beforeunload", function() {
+      localStorage.removeItem("elenco");
+    });
   </script>
 
 </body>
