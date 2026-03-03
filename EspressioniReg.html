@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anagrafica 4.0</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      font-family: Arial, sans-serif;
+      color: #333;
+      padding: 30px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      padding: 6px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+      width: 200px;
+    }
+
+    input[type="button"] {
+      padding: 8px 15px;
+      background-color: #6a5acd;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    table {
+      background: white;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    th {
+      background-color: #6a5acd;
+      color: white;
+      padding: 8px;
+    }
+
+    td {
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="nome"> Nome<br>
+  <input type="text" id="cognome"> Cognome<br>
+  <input type="number" id="eta"> Età<br>
+  <input type="text" id="citta"> Città<br>
+  <input type="text" id="provincia"> Provincia<br>
+  <input type="text" id="nazione"> Nazione<br>
+
+  <input type="button" value="inserisci" onclick="ana()">
+
+  <script>
+    let elementi = JSON.parse(localStorage.getItem("elenco"));
+    if (elementi === null) {
+      elementi = [];
+    }
+
+    const regexNome = /^[a-zA-Z]+$/;
+    const regexCognome = /^[a-zA-Z]+$/;
+    const regexEta = /^(?:1[01][0-9]|120|[0-9]{1,2})$/;
+    const regexCitta = /^[a-zA-Z ]+$/;
+    const regexProvincia = /^[A-Z]{2}$/;
+    const regexNazione = /^[a-zA-Z ]+$/;
+
+    function aggiungiRiga(persone) {
+      let tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + persone.nome + "</td>" +
+        "<td>" + persone.cognome + "</td>" +
+        "<td>" + persone.eta + "</td>" +
+        "<td>" + persone.citta + "</td>" +
+        "<td>" + persone.provincia + "</td>" +
+        "<td>" + persone.nazione + "</td>";
+      document.getElementById("cont").appendChild(tr);
+    }
+
+    function ana() {
+      let nome = document.getElementById("nome").value.trim();
+      let cognome = document.getElementById("cognome").value.trim();
+      let eta = document.getElementById("eta").value.trim();
+      let citta = document.getElementById("citta").value.trim();
+      let provincia = document.getElementById("provincia").value.trim();
+      let nazione = document.getElementById("nazione").value.trim();
+
+      if (!regexNome.test(nome)) {
+        alert("Nome non valido!");
+        return;
+      }
+      if (!regexCognome.test(cognome)) {
+        alert("Cognome non valido!");
+        return;
+      }
+      if (!regexEta.test(eta)) {
+        alert("Età non valida!");
+        return;
+      }
+      if (!regexCitta.test(citta)) {
+        alert("Città non valida!");
+        return;
+      }
+      if (!regexProvincia.test(provincia)) {
+        alert("Provincia non valida!");
+        return;
+      }
+      if (!regexNazione.test(nazione)) {
+        alert("Nazione non valida!");
+        return;
+      }
+
+      const persone = { nome, cognome, eta, citta, provincia, nazione };
+      elementi.push(persone);
+      localStorage.setItem("elenco", JSON.stringify(elementi));
+      aggiungiRiga(persone);
+    }
+
+  </script>
+
+  <table border="1">
+    <tr>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Età</th>
+      <th>Città</th>
+      <th>Provincia</th>
+      <th>Nazione</th>
+    </tr>
+    <tbody id="cont"></tbody>
+  </table>
+
+  <script>
+    let cont = document.getElementById("cont");
+    let s = JSON.parse(localStorage.getItem("elenco"));
+    if (s !== null) {
+      for (let i = 0; i < s.length; i++) {
+        let tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + s[i].nome + "</td>" +
+          "<td>" + s[i].cognome + "</td>" +
+          "<td>" + s[i].eta + "</td>" +
+          "<td>" + s[i].citta + "</td>" +
+          "<td>" + s[i].provincia + "</td>" +
+          "<td>" + s[i].nazione + "</td>";
+        cont.appendChild(tr);
+      }
+    }
+  </script>
+
+</body>
+</html>
