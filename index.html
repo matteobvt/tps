@@ -1,1 +1,36 @@
-<h1>Ciao bro</h1>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index
+    </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="contenitore">
+
+        <h2>Andamento Nazionale COVID-19</h2>
+
+        <p id="testo-sottotitolo">
+            Visualizzazione degli ultimi 10 giorni registrati
+        </p>
+
+        <div class="controlli">
+            <label for="input-giorni">Quanti giorni vuoi vedere?</label>
+            <input type="number" id="input-giorni" value="10" min="1">
+            <button id="btn-aggiorna">Aggiorna Tabella</button>
+        </div>
+
+        <div class="tabella-wrapper">
+            <table id="tabella-covid"></table>
+        </div>
+
+    </div>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>
